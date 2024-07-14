@@ -221,7 +221,7 @@ const DEFAULT_EDITOR_CONFIG = {
 })
 export class CkeditorComponent {
 	@Input() 
-	data: any = '';
+	data: any = '<p>Initial data from ng8</p>';
 	
 	@Input()
 	hasCustomEditorConfig: boolean = false;
@@ -291,6 +291,7 @@ export class CkeditorComponent {
 		this.editorInstance.model.document.on('change:data', () => {
 			const data = this.editorInstance.getData();
 			this.dataChange.emit(data);
+			console.log('data change emiited')
 		});
 
 		this.editorInstance.ui.focusTracker.on('change:isFocused', () => {
