@@ -220,6 +220,9 @@ const DEFAULT_EDITOR_CONFIG = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CkeditorComponent {
+	@Input() 
+	data: any = '';
+	
 	@Input()
 	hasCustomEditorConfig: boolean = false;
 
@@ -237,7 +240,7 @@ export class CkeditorComponent {
 
 	ckEditorCssFileLocation = 'ck-editor.style.css';
 	editorInstance: any;
-	data: any = '';
+	
 
 	ngAfterViewInit(): void {
 		this.loadStyles();
@@ -277,51 +280,26 @@ export class CkeditorComponent {
 			toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 		}
 
-		const availablePlugins = editor.plugins;
-
-		// console.log('Available Plugins:', availablePlugins);
-
 		if (this.hasCustomEditorConfig) {
 			this.setCustomEditorConfig(editor, this.editorConfig);
 		}
 
+		this.emitOutputEvents();
+	}
+
+	emitOutputEvents() {
 		this.editorInstance.model.document.on('change:data', () => {
 			const data = this.editorInstance.getData();
-			this.editorInstance.setData(data);
 			this.dataChange.emit(data);
-			console.log(data);
-			
 		});
 
 		this.editorInstance.ui.focusTracker.on('change:isFocused', () => {
 			const data = this.editorInstance.getData();
-			this.editorInstance.setData(data);
 			this.blur.emit(data);
 		});
-
-		
 	}
 
 	setCustomEditorConfig(editor: any, customConfig: any) {
 		editor.config.set(customConfig);
 	}
-
-	// ngOnChanges(changes: SimpleChanges): void {
-	//   if (changes['data'] && this.editorInstance) {
-	//     this.editorInstance.setData(this.data);
-	//   }
-	// }
-
-	// public onChange({ editor }: { editor: Editor }) {
-	//   const data = editor.getData();
-	//   this.dataChange.emit(data);
-	//   console.log(data);
-	// }
-
-	// public onReady(editor: Editor) {
-	//   this.editorInstance = editor;
-	//   if (this.data) {
-	//     editor.setData(this.data);
-	//   }
-	// }
 }
