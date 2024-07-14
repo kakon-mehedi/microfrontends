@@ -233,7 +233,7 @@ export class CkeditorComponent {
 	blur: EventEmitter<any> = new EventEmitter();
 
 	@Output()
-	change: EventEmitter<any> = new EventEmitter();
+	dataChange: EventEmitter<any> = new EventEmitter();
 
 	ckEditorCssFileLocation = 'ck-editor.style.css';
 	editorInstance: any;
@@ -284,27 +284,22 @@ export class CkeditorComponent {
 		if (this.hasCustomEditorConfig) {
 			this.setCustomEditorConfig(editor, this.editorConfig);
 		}
-	}
 
-	emitOutputValueEvents() {
-		this.emitOnChangeOutputData();
-		this.emitOnBlurOutputData();
-	}
-
-	emitOnChangeOutputData() {
 		this.editorInstance.model.document.on('change:data', () => {
 			const data = this.editorInstance.getData();
 			this.editorInstance.setData(data);
-			this.change.emit(data);
+			this.dataChange.emit(data);
+			console.log(data);
+			
 		});
-	}
 
-	emitOnBlurOutputData() {
 		this.editorInstance.ui.focusTracker.on('change:isFocused', () => {
 			const data = this.editorInstance.getData();
 			this.editorInstance.setData(data);
 			this.blur.emit(data);
 		});
+
+		
 	}
 
 	setCustomEditorConfig(editor: any, customConfig: any) {
