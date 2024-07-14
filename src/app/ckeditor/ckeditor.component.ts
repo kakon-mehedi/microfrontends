@@ -1,87 +1,79 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Editor, EditorConfig } from '@ckeditor/ckeditor5-core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { DecoupledEditor, Essentials, Italic, Paragraph, Bold, Undo } from 'ckeditor5';
+
 
 @Component({
-  selector: 'app-ckeditor',
-  templateUrl: './ckeditor.component.html',
-  styleUrls: ['./ckeditor.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'app-ckeditor-delta',
+	templateUrl: './ckeditor.component.html',
+	styleUrls: ['./ckeditor.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CkeditorComponent implements OnInit, OnChanges {
-  @Input() data!: string;
-  @Output() dataChange = new EventEmitter<string>();
+export class CkeditorComponent {
+	ckEditorCssFileLocation = 'ck-editor.style.css';
+	editorInstance: any;
+	editorConfig = {
+		plugins: [ Bold, Essentials, Italic, Paragraph, Undo ],
+        toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ]
+	}
+	ngAfterViewInit(): void {
+		this.loadStyles();
+		this.loadCKEditor();
+	}
 
-  public Editor = ClassicEditor;
-  public config: EditorConfig = {
-    toolbar: [
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'link',
-      'blockquote',
-      'code',
-      'codeBlock',
-      'insertTable',
-      'imageUpload',
-      'mediaEmbed',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-      '|',
-      'alignment',
-      'fontBackgroundColor',
-      'fontColor',
-      'fontFamily',
-      'fontSize',
-      '|',
-      'removeFormat',
-      '|',
-      'undo',
-      'redo'
-    ],
-    plugins: ClassicEditor.builtinPlugins,
-    licenseKey: '<YOUR_LICENSE_KEY>',
-    mention: {
-      feeds: [
-        {
-          marker: '@',
-          feed: ['@angular', '@ckeditor', '@typescript'],
-          minimumCharacters: 1
-        }
-      ]
-    }
-  };
+	loadStyles() {
+		const ckEditorStyle = this.generateStyle(this.ckEditorCssFileLocation);
+		document.head.appendChild(ckEditorStyle);
+	}
 
-  private editorInstance: Editor | null = null;
+	generateStyle(url: string): HTMLLinkElement {
+		const link: HTMLLinkElement = document.createElement('link');
+		link.setAttribute('rel', 'stylesheet');
+		link.setAttribute('type', 'text/css');
+		link.setAttribute('href', url);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+		return link;
+	}
 
-  ngOnInit(): void {}
+	loadCKEditor(): void {
+		const editorContainer: any = document.querySelector('#editor');
+			DecoupledEditor
+			.create(editorContainer, this.editorConfig)
+			.then((editor: any) => {
+				this.initializeCKEditor(editor);
+			})
+			.catch((err: any) => {
+				console.error(err.stack);
+			});
+	}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] && this.editorInstance) {
-      this.editorInstance.setData(this.data);
-    }
-  }
+	initializeCKEditor(editor: any): void {
+		this.editorInstance = editor;
 
-  public onChange({ editor }: { editor: Editor }) {
-    const data = editor.getData();
-    this.dataChange.emit(data);
-    console.log(data);
-  }
+		const toolbarContainer = document.querySelector('#toolbar-container');
+		if (toolbarContainer) {
+			toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+		}
 
-  public onReady(editor: Editor) {
-    this.editorInstance = editor;
-    if (this.data) {
-      editor.setData(this.data);
-    }
-  }
+		const availablePlugins = editor.plugins;
+
+		console.log('Available Plugins:', availablePlugins);
+
+		this.editorInstance.model.document.on('change:data', () => {
+			const data = this.editorInstance.getData();
+			console.log('Content has changed:', data);
+		});
+	}
+	getEditorContent(): void {
+		if (this.editorInstance) {
+			const content = this.editorInstance.getData();
+			console.log('Current content:', content);
+		}
+	}
+
+	setEditorContent(content: string): void {
+		if (this.editorInstance) {
+			this.editorInstance.setData(content);
+		}
+	}
 }

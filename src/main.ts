@@ -11,6 +11,6 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .then(moduleRef => {
     const injector = moduleRef.injector;
-    registerCustomElement(injector);
+   // registerCustomElement(injector);
   })
   .catch(err => console.error(err));

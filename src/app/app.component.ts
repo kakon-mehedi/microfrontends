@@ -21,37 +21,37 @@ export class AppComponent implements AfterViewInit {
 	constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
 	ngAfterViewInit() {
-		this.updateCkeditorElementData();
+		// this.updateCkeditorElementData();
 
-		window.addEventListener('message', (event) => {
-			if (event.data && event.data.type === 'DATA_CHANGED') {
-				this.ngZone.run(() => {
-					this.ckeditorData = event.data.data;
-					this.cdr.detectChanges();
-				});
-			}
-		});
+		// window.addEventListener('message', (event) => {
+		// 	if (event.data && event.data.type === 'DATA_CHANGED') {
+		// 		this.ngZone.run(() => {
+		// 			this.ckeditorData = event.data.data;
+		// 			this.cdr.detectChanges();
+		// 		});
+		// 	}
+		// });
 
-		const ckeditorElement =
-			this.ckeditorElementContainer.nativeElement.querySelector(
-				'#ckeditor-element'
-			);
-		ckeditorElement.addEventListener('dataChange', (event: CustomEvent) => {
-			console.log('Data changed in CKEditor:', event.detail);
-			parent.postMessage(
-				{ type: 'DATA_CHANGED', data: event.detail },
-				'*'
-			);
-		});
+		// const ckeditorElement =
+		// 	this.ckeditorElementContainer.nativeElement.querySelector(
+		// 		'#ckeditor-element'
+		// 	);
+		// ckeditorElement.addEventListener('dataChange', (event: CustomEvent) => {
+		// 	console.log('Data changed in CKEditor:', event.detail);
+		// 	parent.postMessage(
+		// 		{ type: 'DATA_CHANGED', data: event.detail },
+		// 		'*'
+		// 	);
+		// });
 	}
 
 	private updateCkeditorElementData() {
-		const ckeditorElement =
-			this.ckeditorElementContainer.nativeElement.querySelector(
-				'#ckeditor-element'
-			);
-		if (ckeditorElement) {
-			ckeditorElement.setAttribute('data', this.ckeditorData);
-		}
+		// const ckeditorElement =
+		// 	this.ckeditorElementContainer.nativeElement.querySelector(
+		// 		'#ckeditor-element'
+		// 	);
+		// if (ckeditorElement) {
+		// 	ckeditorElement.setAttribute('data', this.ckeditorData);
+		// }
 	}
 }
