@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit {
 		window.addEventListener('message', (event) => {
 			if (event.data && event.data.type === 'DATA_CHANGED') {
 				this.ngZone.run(() => {
-					this.ckeditorData = event.data.data;
+					this.ckeditorData = this.ckeditorData;
 					console.log(event.data.data);
 					this.cdr.detectChanges();
 				});
@@ -57,16 +57,14 @@ export class AppComponent implements AfterViewInit {
 	}
 }
 
-
 /**
- * Solution 1: Web component 
+ * Solution 1: Web component
  * Why it did not work ?
  * Duplicate module error => Need to remove from the whole app
- * 
- * 
+ *
+ *
  * Solution 2: Iframe
  */
-
 
 /**
  * Build the app by npm run build - build scrpt from package .json
@@ -74,10 +72,9 @@ export class AppComponent implements AfterViewInit {
  * otherwise amader delta te integrate korte gele webpack e config korte hoto
  * When adding to delta
  * Angular.json er build er assests[] array te script gula load koray dite hobe
- * 
+ *
  * static file er path change kore dite hobe index.html er
  */
-
 
 // Add this on angular.json build assets array
 

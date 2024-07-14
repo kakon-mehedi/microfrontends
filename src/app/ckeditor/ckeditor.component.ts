@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
+import {
+	Component,
+	ChangeDetectionStrategy,
+	EventEmitter,
+	Input,
+	Output,
+} from '@angular/core';
 
 import {
 	DecoupledEditor,
@@ -288,6 +294,7 @@ export class CkeditorComponent {
 	emitOnChangeOutputData() {
 		this.editorInstance.model.document.on('change:data', () => {
 			const data = this.editorInstance.getData();
+			this.editorInstance.setData(data);
 			this.change.emit(data);
 		});
 	}
@@ -295,6 +302,7 @@ export class CkeditorComponent {
 	emitOnBlurOutputData() {
 		this.editorInstance.ui.focusTracker.on('change:isFocused', () => {
 			const data = this.editorInstance.getData();
+			this.editorInstance.setData(data);
 			this.blur.emit(data);
 		});
 	}
@@ -302,4 +310,23 @@ export class CkeditorComponent {
 	setCustomEditorConfig(editor: any, customConfig: any) {
 		editor.config.set(customConfig);
 	}
+
+	// ngOnChanges(changes: SimpleChanges): void {
+	//   if (changes['data'] && this.editorInstance) {
+	//     this.editorInstance.setData(this.data);
+	//   }
+	// }
+
+	// public onChange({ editor }: { editor: Editor }) {
+	//   const data = editor.getData();
+	//   this.dataChange.emit(data);
+	//   console.log(data);
+	// }
+
+	// public onReady(editor: Editor) {
+	//   this.editorInstance = editor;
+	//   if (this.data) {
+	//     editor.setData(this.data);
+	//   }
+	// }
 }
