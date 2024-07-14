@@ -14,7 +14,7 @@ import {
 })
 export class AppComponent implements AfterViewInit {
 	title = 'custom-element-project';
-	ckeditorData: string = '<p>Initial data from ng8</p>';
+	ckeditorData: string = '<p>Initial data from ng8 delta </p>';
 	@ViewChild('ckeditorElementContainer', { static: false })
 	ckeditorElementContainer!: ElementRef;
 
