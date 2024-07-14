@@ -1,2 +1,7 @@
 <div id="toolbar-container"></div>
-<div id="editor">Hello</div>
+<div
+	id="editor"
+	[ngClass]="focusOnStart ? 'ck-focused' : ''"
+>
+	{{ data }}
+</div>
