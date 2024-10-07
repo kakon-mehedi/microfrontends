@@ -11,7 +11,34 @@ import {
 } from '@angular/core';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { EditorConfig, Editor } from '@ckeditor/ckeditor5-core';
+class Base64UploadAdapter {
+	loader: any;
 
+	constructor(loader: any) {
+		this.loader = loader;
+	}
+
+	upload() {
+		return this.loader.file
+			.then((file: File) => new Promise((resolve, reject) => {
+				const reader = new FileReader();
+
+				reader.onload = () => {
+					resolve({ default: reader.result as string });
+				};
+
+				reader.onerror = error => {
+					reject(error);
+				};
+
+				reader.readAsDataURL(file); // Converts the image to base64
+			}));
+	}
+
+	abort() {
+		// Handle if the upload is aborted (optional).
+	}
+}
 @Component({
 	selector: 'app-ckeditor',
 	templateUrl: './ckeditor.component.html',
@@ -79,6 +106,39 @@ export class CkeditorComponent implements OnInit, OnChanges {
 				},
 			],
 		},
+		image: {
+			toolbar: [
+				'imageTextAlternative', // Add Alt Text option
+				'imageStyle:full',
+				'imageStyle:side',
+				'imageStyle:center' // Optional: Add center option if you want it
+			],
+			styles: {
+				options: [
+					{
+						name: 'full',
+						title: 'Full',
+						className: 'image-style-full',
+						icon: '<svg>...</svg>', // Add your SVG icon
+						modelElements: ['imageBlock']
+					},
+					{
+						name: 'side',
+						title: 'Side',
+						className: 'image-style-side',
+						icon: '<svg>...</svg>', // Add your SVG icon
+						modelElements: ['imageBlock']
+					},
+					{
+						name: 'center',
+						title: 'Center',
+						className: 'image-style-center', // Add custom CSS for centering
+						icon: '<svg>...</svg>', // Add your SVG icon
+						modelElements: ['imageBlock']
+					}
+				]
+			}
+		}
 	};
 
 	private editorInstance: Editor | null = null;
@@ -102,6 +162,10 @@ export class CkeditorComponent implements OnInit, OnChanges {
 	public onReady(editor: Editor) {
 		this.editorInstance = editor;
 		editor.focus();
+		editor.plugins.get('FileRepository').createUploadAdapter = (loader: any) => {
+			return new Base64UploadAdapter(loader);
+		};
+
 		if (this.data) {
 			editor.setData(this.data);
 		}
