@@ -5,6 +5,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
 import { CkeditorComponent } from './ckeditor/ckeditor.component'; // Adjust this import based on your project structure
 import { createCustomElement } from '@angular/elements';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { createCustomElement } from '@angular/elements';
   imports: [
     BrowserModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
