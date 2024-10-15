@@ -105,8 +105,6 @@ class HttpUploadAdapter {
 	}
 }
 
-
-
 @Component({
 	selector: 'app-ckeditor',
 	templateUrl: './ckeditor.component.html',
@@ -162,7 +160,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
 			'pageBreak',
 			'specialCharacters',
 		],
-		plugins: [(DecoupledEditor as any).builtinPlugins,CustomColorPicker],
+		plugins: (DecoupledEditor as any).builtinPlugins,
 		licenseKey: '<YOUR_LICENSE_KEY>',
 		mention: {
 			feeds: [
@@ -184,39 +182,39 @@ export class CkeditorComponent implements OnInit, OnChanges {
 					label: 'Green'
 				},
 				{
-					color: '#0000FF', // Blue using HEX
+					color: 'rgb(0, 0, 255)', // Blue
 					label: 'Blue'
 				},
 				{
-					color: '#FFFF00', // Yellow using HEX
+					color: 'rgb(255, 255, 0)', // Yellow
 					label: 'Yellow'
 				},
 				// Add more colors as needed
 			]
 		},
+
 		fontBackgroundColor: {
 			colors: [
 				{
-					color: 'rgb(255, 255, 0)', // Yellow
-					label: 'Yellow'
+					color: 'rgb(255, 255, 255)', // White
+					label: 'White'
 				},
 				{
 					color: 'rgb(255, 0, 0)', // Red
 					label: 'Red'
 				},
 				{
-					color: '#00FF00', // Green using HEX
+					color: 'rgb(0, 255, 0)', // Green
 					label: 'Green'
 				},
 				{
-					color: '#ADD8E6', // Light Blue using HEX
+					color: 'rgb(173, 216, 230)', // Light Blue
 					label: 'Light Blue'
 				},
 				// Add more colors as needed
 			]
 		},
 
-		// Configure the highlight plugin with colors in rgb() or hex values
 		highlight: {
 			options: [
 				{
@@ -237,16 +235,17 @@ export class CkeditorComponent implements OnInit, OnChanges {
 					model: 'pinkMarker',
 					class: 'marker-pink',
 					title: 'Pink marker',
-					color: '#FFC0CB', // Pink using HEX
+					color: 'rgb(255, 192, 203)', // Pink
 					type: 'marker'
 				},
 				{
 					model: 'blueMarker',
 					class: 'marker-blue',
 					title: 'Blue marker',
-					color: '#00BFFF', // Blue using HEX
+					color: 'rgb(0, 191, 255)', // Blue
 					type: 'marker'
 				},
+				// Add more highlight colors as needed
 			]
 		},
 		image: {
