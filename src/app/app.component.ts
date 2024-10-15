@@ -24,29 +24,30 @@ export class AppComponent implements AfterViewInit {
 	ngAfterViewInit() {
 		this.updateCkeditorElementData();
 
-		const messageListener = (event: MessageEvent) => {
-			if (event.data) {
-				// console.log('Message received in child:', event.data);
-				if (event.data.type === 'DATA_CHANGED') {
-					this.ngZone.run(() => {
-						if (!this.isSettingInitialData) {
-							this.ckeditorData = event.data.data;
-							this.cdr.detectChanges();
-						}
-					});
-				} else if (event.data.type === 'SET_DATA') {
-					this.ngZone.run(() => {
-						this.ckeditorData = event.data.data;
-						this.isSettingInitialData = true; // Set the flag before updating data
-						this.updateCkeditorElementData();
-						// Remove the event listener once the initial data is set
-						window.removeEventListener('message', messageListener);
-					});
-				}
-			}
-		};
+		// const messageListener = (event: MessageEvent) => {
+		// 	if (event.data) {
+		// 		console.log('Message received in child:', event.data);
+		// 		if (event.data.type === 'DATA_CHANGED') {
+		// 			this.ngZone.run(() => {
+		// 				if (!this.isSettingInitialData) {
+		// 					this.ckeditorData = event.data.data;
+		// 					this.cdr.detectChanges();
+		// 				}
+		// 			});
+		// 		} else if (event.data.type === 'SET_DATA') {
+		// 			this.ngZone.run(() => {
+		// 				this.ckeditorData = event.data.data;
+		// 				this.isSettingInitialData = true; // Set the flag before updating data
+		// 				this.updateCkeditorElementData();
+		// 				// Remove the event listener once the initial data is set
+		// 				window.removeEventListener('message', messageListener);
+		// 			});
+		// 		}
+		// 	}
+		// };
 
-		window.addEventListener('message', messageListener);
+		// This will create memory leak
+		// window.addEventListener('message', messageListener);
 
 		const ckeditorElement =
 			this.ckeditorElementContainer.nativeElement.querySelector(
