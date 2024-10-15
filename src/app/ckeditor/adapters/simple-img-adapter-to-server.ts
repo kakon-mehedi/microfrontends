@@ -4,10 +4,10 @@ import { Guid } from 'guid-typescript';
 export class SimpleImageUploadAdapter {
 	loader: any;
 	http: HttpClient;
-	token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiJBNTRENkQ4Mi02MUY2LTRCRDAtQkFGOC1CRDA2QjBBRDcyRkYiLCJzdWIiOiIzODg2NTVhOS01MjM4LTQwMzYtOWM2NC1kYWU4ZGZhZTYzNDEiLCJzaXRlX2lkIjoiRTk4NkZCMjYtQTBERC00OUU0LUI5QzUtMzQ4NTUzNzlCQTZEIiwib3JpZ2luIjoiZGVsdGEuc2VsaXNlbG9jYWwuY29tIiwic2Vzc2lvbl9pZCI6InNlbGlzZWJsb2Nrcy04NmM3Njg3MS0zZThkLTQ3ZDMtOTM2NC04NmEyMWZlZTdhZmUiLCJ1c2VyX2lkIjoiMzg4NjU1YTktNTIzOC00MDM2LTljNjQtZGFlOGRmYWU2MzQxIiwiZGlzcGxheV9uYW1lIjoiU2VsaXNlIFRlc3QgQWRtaW5uIiwic2l0ZV9uYW1lIjoiRWNhcCBUZWFtIiwidXNlcl9uYW1lIjoic2VsaXNldGVzdC5kZWx0YUBnbWFpbC5jb20iLCJlbWFpbCI6InNlbGlzZXRlc3QuZGVsdGFAZ21haWwuY29tIiwicGhvbmVfbnVtYmVyIjoiKzQxNzY1NDM1MzU2IiwibGFuZ3VhZ2UiOiJlbi1VUyIsInVzZXJfbG9nZ2VkaW4iOiJUcnVlIiwibmFtZSI6IjM4ODY1NWE5LTUyMzgtNDAzNi05YzY0LWRhZThkZmFlNjM0MSIsInVzZXJfYXV0b19leHBpcmUiOiJGYWxzZSIsInVzZXJfZXhwaXJlX29uIjoiMDEvMDEvMDAwMSAwMDowMDowMCIsImlhdCI6MTcyODk4MDM2OSwicm9sZSI6WyJhcHB1c2VyIiwiYWRtaW4iLCJkZWx0YV9lbXBsb3llZSIsImFub255bW91cyIsImZyLnVhbS5yZWFkIiwiZnIudWFtLnVwZGF0ZSIsImZyLnVhbS5kZWxldGUiLCJmci5hbm5vdW5jZW1lbnQucmVhZCIsImZyLmFubm91bmNlbWVudC5lZGl0IiwiZnIuYW5ub3VuY2VtZW50LmRlbGV0ZSJdLCJoZHIiOiJUcnVlIiwibmJmIjoxNzI4OTgwMzY5LCJleHAiOjE3Mjg5ODA3ODksImlzcyI6IkNOPUVudGVycHJpc2UgQ2xvdWQgQXBwbGljYXRpb24gUGxhdGZvcm0iLCJhdWQiOiIqIn0.GldrqC-sOgMBkFEeYuIVI8fyzhcfEkq8vwGMz3EhRtj3WVwcUlMh4gx6SdLD-jpnoCcGjEZFtuccZf0K_PydUX9BR5XE9WxVLisvGlDn6m96PuLRHKLyGWS0eWJ1h7CwqCM3fQWjdyCZC8a_PGH6jCqqdeiKkSngK-qV3ZEqKWmu85GLsJN0yC7X6WvGTn3tWZYXo6Vyiv7Bj8i31MTN1jyIUEAv_KDn4LLpqV7cjBGoQOUHHxJeV2-RJ30lKCNWO2rFKRorTZnDodi5paocyweogVUZVWaT5mXRsdyhB2zofP75g3gAUgEIlu3eUUFsZRnerfQlup_2pqn-8zabwg"
+	// token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiJBNTRENkQ4Mi02MUY2LTRCRDAtQkFGOC1CRDA2QjBBRDcyRkYiLCJzdWIiOiIzODg2NTVhOS01MjM4LTQwMzYtOWM2NC1kYWU4ZGZhZTYzNDEiLCJzaXRlX2lkIjoiRTk4NkZCMjYtQTBERC00OUU0LUI5QzUtMzQ4NTUzNzlCQTZEIiwib3JpZ2luIjoiZGVsdGEuc2VsaXNlbG9jYWwuY29tIiwic2Vzc2lvbl9pZCI6InNlbGlzZWJsb2Nrcy04NmM3Njg3MS0zZThkLTQ3ZDMtOTM2NC04NmEyMWZlZTdhZmUiLCJ1c2VyX2lkIjoiMzg4NjU1YTktNTIzOC00MDM2LTljNjQtZGFlOGRmYWU2MzQxIiwiZGlzcGxheV9uYW1lIjoiU2VsaXNlIFRlc3QgQWRtaW5uIiwic2l0ZV9uYW1lIjoiRWNhcCBUZWFtIiwidXNlcl9uYW1lIjoic2VsaXNldGVzdC5kZWx0YUBnbWFpbC5jb20iLCJlbWFpbCI6InNlbGlzZXRlc3QuZGVsdGFAZ21haWwuY29tIiwicGhvbmVfbnVtYmVyIjoiKzQxNzY1NDM1MzU2IiwibGFuZ3VhZ2UiOiJlbi1VUyIsInVzZXJfbG9nZ2VkaW4iOiJUcnVlIiwibmFtZSI6IjM4ODY1NWE5LTUyMzgtNDAzNi05YzY0LWRhZThkZmFlNjM0MSIsInVzZXJfYXV0b19leHBpcmUiOiJGYWxzZSIsInVzZXJfZXhwaXJlX29uIjoiMDEvMDEvMDAwMSAwMDowMDowMCIsImlhdCI6MTcyODk4NDIxMiwicm9sZSI6WyJhcHB1c2VyIiwiYWRtaW4iLCJkZWx0YV9lbXBsb3llZSIsImFub255bW91cyIsImZyLnVhbS5yZWFkIiwiZnIudWFtLnVwZGF0ZSIsImZyLnVhbS5kZWxldGUiLCJmci5hbm5vdW5jZW1lbnQucmVhZCIsImZyLmFubm91bmNlbWVudC5lZGl0IiwiZnIuYW5ub3VuY2VtZW50LmRlbGV0ZSJdLCJoZHIiOiJUcnVlIiwibmJmIjoxNzI4OTg0MjEyLCJleHAiOjE3Mjg5ODQ2MzIsImlzcyI6IkNOPUVudGVycHJpc2UgQ2xvdWQgQXBwbGljYXRpb24gUGxhdGZvcm0iLCJhdWQiOiIqIn0.hjdTsdwACHQdoGTEoOMtPMMzVFEBptFCFrbMTx_0APBbczf0NPs-tccVUsWxmFb9bz97z4yBPiEPVWXWsZUp9j154-hMRhgvUCaabhVRN75FTdN8DGt8S_5zHfdqRrwVhjqdmNCAdMFsMj3nTEWHlaZoy4olXVNNLqVUst4jeYxOcV1kTEJ71R9NmST4SR5xzAwfRv2LO88Lxl_W8TupCi42LIPNA_pKv62kYrUbmtCRpengbm8qOXH6DEd3qVv3GuUMUGVMlO9HOTDIXCCjLzXUmKUDdALvYEgRfjEiqm-UultwlKpdai7mQ0RAK98WYk35oxWu6z0yXyAcZQ89wg"
 	header: any = new HttpHeaders({
 		'Content-Type': 'application/json',
-		'Authorization': `Bearer ${this.token}`,
+		// 'Authorization': `Bearer ${this.token}`,
 	});
 
 	constructor(loader: any, http: HttpClient) {
@@ -53,7 +53,7 @@ export class SimpleImageUploadAdapter {
 						// Step 3: After upload, get the file URL using the FileID
 						return this.getFileUrl(response.body.FileId).then((fileUrl: string) => {
 							// Return the uploaded image URL
-							return { default: fileUrl }; // Use the returned URL as the source
+							return { default: fileUrl };
 						});
 					});
 				})
@@ -67,7 +67,7 @@ export class SimpleImageUploadAdapter {
 	private uploadToServer(uploadUrl: string, file: File): Promise<void> {
 		return fetch(uploadUrl, {
 			method: 'PUT',
-			body: file,  // Upload the file directly
+			body: file,
 			headers: {
 				'x-ms-blob-type': 'blockblob'
 			}
@@ -87,8 +87,7 @@ export class SimpleImageUploadAdapter {
 				}
 		).toPromise()
 			.then((response: any) => {
-				// Assuming the URL is returned in the response
-				return response.Url; // Adjust based on the actual structure of your API response
+				return response.Url;
 			})
 			.catch(error => {
 				console.error('Error getting file URL:', error);
