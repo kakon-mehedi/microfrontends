@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit {
 
 		const messageListener = (event: MessageEvent) => {
 			if (event.data) {
-				console.log('Message received in child:', event.data);
+				// console.log('Message received in child:', event.data);
 				if (event.data.type === 'DATA_CHANGED') {
 					this.ngZone.run(() => {
 						if (!this.isSettingInitialData) {
