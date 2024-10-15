@@ -105,6 +105,8 @@ class HttpUploadAdapter {
 	}
 }
 
+
+
 @Component({
 	selector: 'app-ckeditor',
 	templateUrl: './ckeditor.component.html',
@@ -160,7 +162,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
 			'pageBreak',
 			'specialCharacters',
 		],
-		plugins: (DecoupledEditor as any).builtinPlugins,
+		plugins: [(DecoupledEditor as any).builtinPlugins,CustomColorPicker],
 		licenseKey: '<YOUR_LICENSE_KEY>',
 		mention: {
 			feeds: [
@@ -170,6 +172,82 @@ export class CkeditorComponent implements OnInit, OnChanges {
 					minimumCharacters: 1,
 				},
 			],
+		},
+		fontColor: {
+			colors: [
+				{
+					color: 'rgb(255, 0, 0)', // Red
+					label: 'Red'
+				},
+				{
+					color: 'rgb(0, 128, 0)', // Green
+					label: 'Green'
+				},
+				{
+					color: '#0000FF', // Blue using HEX
+					label: 'Blue'
+				},
+				{
+					color: '#FFFF00', // Yellow using HEX
+					label: 'Yellow'
+				},
+				// Add more colors as needed
+			]
+		},
+		fontBackgroundColor: {
+			colors: [
+				{
+					color: 'rgb(255, 255, 0)', // Yellow
+					label: 'Yellow'
+				},
+				{
+					color: 'rgb(255, 0, 0)', // Red
+					label: 'Red'
+				},
+				{
+					color: '#00FF00', // Green using HEX
+					label: 'Green'
+				},
+				{
+					color: '#ADD8E6', // Light Blue using HEX
+					label: 'Light Blue'
+				},
+				// Add more colors as needed
+			]
+		},
+
+		// Configure the highlight plugin with colors in rgb() or hex values
+		highlight: {
+			options: [
+				{
+					model: 'yellowMarker',
+					class: 'marker-yellow',
+					title: 'Yellow marker',
+					color: 'rgb(255, 255, 0)', // Yellow
+					type: 'marker'
+				},
+				{
+					model: 'greenMarker',
+					class: 'marker-green',
+					title: 'Green marker',
+					color: 'rgb(0, 255, 0)', // Green
+					type: 'marker'
+				},
+				{
+					model: 'pinkMarker',
+					class: 'marker-pink',
+					title: 'Pink marker',
+					color: '#FFC0CB', // Pink using HEX
+					type: 'marker'
+				},
+				{
+					model: 'blueMarker',
+					class: 'marker-blue',
+					title: 'Blue marker',
+					color: '#00BFFF', // Blue using HEX
+					type: 'marker'
+				},
+			]
 		},
 		image: {
 			toolbar: [
