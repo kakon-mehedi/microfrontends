@@ -58,9 +58,9 @@ export class CkeditorComponent implements OnInit, OnChanges {
 					if (key == 'src') {
 						var arr = val.toString().split('/');
 						const ItemId = arr[5];
-						this.deleteFile(ItemId).subscribe((response) => {
-							console.log(response.body)
-						});
+						// this.deleteFile(ItemId).subscribe((response) => {
+						// 	console.log(response.body)
+						// });
 					}
 				}
 			}
@@ -95,7 +95,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
 	}
 
 	public deleteFile(itemId: string): Observable<any> {
-		return this.http.post("http://microservices.seliselocal.com/api/storageservice/v22/StorageService/StorageCommand/DeleteFile",
+		return this.http.post("https://delta.selisestage.com/api/storageservice/v23/StorageService/StorageCommand/DeleteFile",
 			{ ItemId: itemId },
 			{ headers: this.header, withCredentials: true, observe: 'response' }
 		).pipe(map((response) => {
