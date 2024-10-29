@@ -56,6 +56,16 @@ export const editorConfig: EditorConfig = {
             },
         ],
     },
+    fontSize: {
+        options: [
+            { title: 'Tiny', model: '10px' },
+            { title: 'Small', model: '12px' },
+            { title: 'Default', model: '14px' },
+            { title: 'Big', model: '18px' },
+            { title: 'Huge', model: '24px' },
+        ],
+        supportAllValues: false,
+    },
     fontColor: {
         colors: [
             {
