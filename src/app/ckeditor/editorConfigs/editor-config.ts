@@ -1,5 +1,6 @@
 import {EditorConfig} from "@ckeditor/ckeditor5-core";
 import * as DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import CustomTableCellHorizontalAlignment from "../adapters/customtablecellalignment.plugin";
 
 export const editorConfig: EditorConfig = {
     toolbar: [
@@ -44,8 +45,14 @@ export const editorConfig: EditorConfig = {
         'htmlEmbed',
         'pageBreak',
         'specialCharacters',
+        'alignCellLeft', 'alignCellCenter', 'alignCellRight',
     ],
-    plugins: (DecoupledEditor as any).builtinPlugins,
+    //plugins: (DecoupledEditor as any).builtinPlugins,
+    plugins: [
+        ...(DecoupledEditor as any).builtinPlugins,
+        CustomTableCellHorizontalAlignment
+    ],
+
     licenseKey: '<YOUR_LICENSE_KEY>',
     mention: {
         feeds: [
@@ -274,4 +281,11 @@ export const editorConfig: EditorConfig = {
             options: [],
         },
     },
+    table: {
+        contentToolbar: [
+            'tableColumn', 'tableRow', 'mergeTableCells',
+            'tableCellProperties', 'tableProperties',
+            'alignCellLeft', 'alignCellCenter', 'alignCellRight'
+        ]
+    }
 };
