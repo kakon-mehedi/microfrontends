@@ -1,0 +1,9 @@
+<div id="toolbar-container"></div>
+<ckeditor
+  [editor]="Editor"
+  [data]="data"
+  [config]="config"
+  (change)="onChange($event)"
+  (ready)="onReady($event)"
+  id="ck-editor-delta"
+></ckeditor>
