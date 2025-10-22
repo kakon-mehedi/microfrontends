@@ -1524,7 +1524,7 @@
     ckeditor5 "42.0.2"
     lodash-es "4.17.21"
 
-"@ckeditor/ckeditor5-core@*", "@ckeditor/ckeditor5-core@42.0.0":
+"@ckeditor/ckeditor5-core@42.0.0":
   version "42.0.0"
   resolved "https://registry.npmjs.org/@ckeditor/ckeditor5-core/-/ckeditor5-core-42.0.0.tgz"
   integrity sha512-0WZTQM4JD3qobXNTPRMq0o1t+vYRWzkzX0LwoooZVn7NKIqCrYqVsTuV0xsN7qT0vdFNRvA9TYYfinw7j9Y4rw==
@@ -1845,7 +1845,7 @@
     ckeditor5 "42.0.2"
     lodash-es "4.17.21"
 
-"@ckeditor/ckeditor5-image@*", "@ckeditor/ckeditor5-image@42.0.0":
+"@ckeditor/ckeditor5-image@42.0.0":
   version "42.0.0"
   resolved "https://registry.npmjs.org/@ckeditor/ckeditor5-image/-/ckeditor5-image-42.0.0.tgz"
   integrity sha512-lKq4OuhLDNS4sip4/yl/vGDuOitTCInMYEhvwZXlm6eFem75FTJnL1Co5+zKIVWktWvH2eFqmOGjv2jKrJIVgw==
@@ -3548,14 +3548,6 @@ chrome-trace-event@^1.0.2:
   version "1.0.4"
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.4.tgz"
   integrity sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==
-
-ckeditor5-image-remove-event-callback-plugin@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/ckeditor5-image-remove-event-callback-plugin/-/ckeditor5-image-remove-event-callback-plugin-1.2.0.tgz"
-  integrity sha512-KpeY19zdaA9eYYBAJZ7Wrw5flyIdwn/3ZHh6ap+Mtn433BSx1Qp520MxQgNfMhVTVEpLkfEDTFCoYn68O/f4Dg==
-  dependencies:
-    "@ckeditor/ckeditor5-core" "*"
-    "@ckeditor/ckeditor5-image" "*"
 
 "ckeditor5@>=42.0.0 || ^0.0.0-nightly", ckeditor5@42.0.0:
   version "42.0.0"

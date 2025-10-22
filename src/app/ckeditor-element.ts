@@ -4,5 +4,9 @@ import { CkeditorComponent } from './ckeditor/ckeditor.component';
 
 export function registerCustomElement(injector: Injector) {
   const customElement = createCustomElement(CkeditorComponent, { injector });
-  customElements.define('ckeditor-element', customElement);
+
+  // Prevent NotSupportedError: element already defined
+  if (!customElements.get('ckeditor-element')) {
+    customElements.define('ckeditor-element', customElement);
+  }
 }
